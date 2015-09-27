@@ -28,7 +28,7 @@ try {
 	if (class_exists($controller))
 		$front = new $controller();
 
-	$front->run();
+	$front->run($db);
 } catch (Exception $e) {
 	$template = $twig->loadTemplate('error.twig');
 	echo $template->render(array(

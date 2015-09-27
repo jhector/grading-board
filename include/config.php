@@ -4,12 +4,13 @@ require_once 'vendor/autoload.php';
 $config['db_host'] = 'localhost';
 $config['db_user'] = 'root'; // TODO: change
 $config['db_pass'] = 'root'; // TODO: change
-$config['db_name'] = 'school';
+$config['db_name'] = 'course_cs';
 $config['db_pref'] = '';
 
 $controllers = array(
 	'Base',
-	'Default'
+	'Default',
+	'Board'
 );
 
 $loader = new Twig_Loader_Filesystem('skeleton');
