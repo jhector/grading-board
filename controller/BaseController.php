@@ -25,7 +25,7 @@ class BaseController
 		if (in_array($this->action, get_class_methods($this)))
 			$this->{$this->action}();
 		else
-			throw new Exception("BaseController can't handle action: ".$this->action);
+			throw new Exception("Controller can't handle action: ".$this->action);
 	}
 }
 ?>
