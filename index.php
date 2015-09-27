@@ -9,7 +9,7 @@ try {
 	$front = new DefaultController();
 
 	if (isset($_REQUEST['site']))
-		$controller = ucfirst($strtolower($_REQUEST['site'])).'Controller';
+		$controller = ucfirst(strtolower($_REQUEST['site'])).'Controller';
 	else
 		$controller = '';
 
