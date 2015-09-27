@@ -18,6 +18,9 @@ try {
 
 	$front->run();
 } catch (Exception $e) {
-	echo htmlspecialchars($e->geMessage());
+	$template = $twig->loadTemplate('error.twig');
+	echo $template->render(array(
+		'error' => htmlspecialchars($e->getMessage())
+	));
 }
 ?>

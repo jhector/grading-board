@@ -3,8 +3,7 @@ class DefaultController extends BaseController
 {
 	public function indexAction()
 	{
-		echo 'Shit seems to work...';
-		exit(0);
+		throw new Exception('Shit seems to work...');
 	}
 }
 ?>
