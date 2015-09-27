@@ -3,7 +3,7 @@ class DefaultController extends BaseController
 {
 	public function indexAction()
 	{
-		throw new Exception('Shit seems to work...');
+		$this->render($this->site.'.twig', $this->vars);
 	}
 }
 ?>

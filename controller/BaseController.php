@@ -27,5 +27,14 @@ class BaseController
 		else
 			throw new Exception("Controller can't handle action: ".$this->action);
 	}
+
+	public function render($skel, $values)
+	{
+		global $twig;
+
+		$template = $twig->loadTemplate($skel);
+		echo $template->render($values);
+		exit(0);
+	}
 }
 ?>
