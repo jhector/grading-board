@@ -1,0 +1,9 @@
+@font-face {
+	font-family: "EraserRegular";
+	src: url("../fonts/EraserRegular.ttf") format("truetype");
+}
+
+body {
+	font-family: "EraserRegular" !important;
+	font-size: 20px;
+}
