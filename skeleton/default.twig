@@ -1,5 +1,21 @@
 {% extends "base.twig" %}
 
 {% block content %}
-default skeleton
+<div>
+<h2>Course status: Full</h2>
+</div>
+<form class="form-inline" method="POST" action="/stealth/">
+  <div class="form-group">
+    <input tupe="text" class="form-control" name="name" placeholder="Find a student" />
+    <input type="hidden" name="action" value="search" />
+  </div>
+  <button type="submit" class="btn btn-default">Search</button>
+</form>
+{% if students %}
+  {% for student in students %}
+  <div>
+    {{ student.id }} {{ student.first_name }} {{ student.last_name }}
+  </div>
+  {% endfor %}
+{% endif %}
 {% endblock %}

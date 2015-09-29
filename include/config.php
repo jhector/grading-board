@@ -9,8 +9,7 @@ $config['db_pref'] = '';
 
 $controllers = array(
 	'Base',
-	'Default',
-	'Board'
+	'Default'
 );
 
 $loader = new Twig_Loader_Filesystem('skeleton');
