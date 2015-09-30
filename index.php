@@ -4,6 +4,7 @@ error_reporting(E_ALL & ~E_DEPRECATED);
 require_once 'include/config.php';
 
 include 'include/Database.php';
+include 'include/Bouncer.php';
 
 foreach ($controllers as $controller) {
 	include 'controller/'.$controller.'Controller.php';
@@ -17,6 +18,10 @@ try {
 		$config['db_name'],
 		$config['db_pref']
 	);
+
+	$bouncer = new Bouncer($db, $config['master_pass']);
+
+	$db = $bouncer->guard();
 
 	$front = new DefaultController();
 

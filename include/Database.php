@@ -2,10 +2,14 @@
 class Database
 {
 	protected $prefix;
+	protected $db_name;
+	protected $host;
 
 	public function __construct($host, $user, $pass, $db, $prefix)
 	{
 		$this->prefix = $prefix;
+		$this->db_name = $db;
+		$this->host = $host;
 
 		if (!mysql_connect($host, $user, $pass))
 			throw new Exception('Couldn\'t connect to database: '.mysql_error());
@@ -30,6 +34,26 @@ class Database
 			array_push($ret, $row);
 
 		return $ret;
+	}
+
+	public function raw($query)
+	{
+		return mysql_query($query);
+	}
+
+	public function getDB()
+	{
+		return $this->db_name;
+	}
+
+	public function getHost()
+	{
+		return $this->host;
+	}
+
+	public function getPrefix()
+	{
+		return $this->prefix;
 	}
 
 	public function sanitize($input)
