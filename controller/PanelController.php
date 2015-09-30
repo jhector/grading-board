@@ -1,13 +1,13 @@
 <?php
 class PanelController extends BaseController
 {
-	public function indexAction($db)
+	public function indexAction($db, $bouncer)
 	{
 		$this->vars['phase_two'] = false;
 		$this->render($this->site.'.twig', $this->vars);
 	}
 
-	public function loginAction($db)
+	public function loginAction($db, $bouncer)
 	{
 		$username = $_REQUEST['username'];
 		$password = $_REQUEST['password'];
@@ -20,6 +20,20 @@ class PanelController extends BaseController
 		}
 
 		$this->vars['phase_two'] = true;
+		$this->render($this->site.'.twig', $this->vars);
+	}
+
+	public function login2Action($db, $bouncer)
+	{
+		$token = $_REQUEST['authtoken'];
+		$real_token = $bouncer->clientGetToken();
+
+		if ($token === $real_token) {
+			$this->vars['flag'] = FLAG;
+			$this->render($this->site.'.twig', $this->vars);
+		}
+
+		$this->vars['error'] = "Invalid token";
 		$this->render($this->site.'.twig', $this->vars);
 	}
 }

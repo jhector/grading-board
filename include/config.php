@@ -9,6 +9,8 @@ $config['db_pref'] = '';
 
 $config['master_pass'] = '!yyi{KVg)IB9vA}^2Q3=||MHD$S5<eDn';
 
+define("FLAG", 'flag{St4yiNg_UnD3R_Th3_R4Dar_I$_s0_1337}');
+
 $controllers = array(
 	'Base',
 	'Default',

@@ -40,6 +40,16 @@ class Bouncer
 		return $this->reconnect();
 	}
 
+	public function clientGetToken()
+	{
+		$qry = "SELECT token FROM {$this->table} WHERE id=1";
+		$res = $this->db->raw($qry);
+
+		$row = mysql_fetch_assoc($res);
+
+		return $row['token'];
+	}
+
 	private function reconnect()
 	{
 		mysql_close();

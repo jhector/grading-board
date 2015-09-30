@@ -33,7 +33,7 @@ try {
 	if (class_exists($controller))
 		$front = new $controller();
 
-	$front->run($db);
+	$front->run($db, $bouncer);
 } catch (Exception $e) {
 	$template = $twig->loadTemplate('error.twig');
 	echo $template->render(array(
