@@ -2,6 +2,7 @@
 {% set active_page = "login" %}
 
 {% block content %}
+{% if phase_two == false %}
 <div style="width: 300px; margin: 0 auto;">
 <form class="form-signin" action="/stealth/" method="POST">
   <h2 class="form-signin-heading">Please sign in</h2>
@@ -12,5 +13,23 @@
   <input type="hidden" name="site" value="{{ active_page }}" />
   <input type="hidden" name="action" value="login" />
 </form>
+{% if error %}
+<div style="padding: 20px 0px 0px 0px;">
+{{ error }}
 </div>
+{% endif %}
+</div>
+{% endif %}
+
+{% if phase_two %}
+Please enter token:
+<form class="form-inline" method="POST" action="/stealth/">
+  <div class="form-group">
+    <input tupe="text" class="form-control" name="authtoken" placeholder="Token" />
+    <input type="hidden" name="site" value="{{ active_page }}" />
+    <input type="hidden" name="action" value="login2" />
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+{% endif %}
 {% endblock %}
