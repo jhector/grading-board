@@ -1,3 +1,5 @@
+{% set navigation_bar = [['default', 'Home'], ['login', 'Login']]%}
+{% set active_page = active_page|default('default') %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,8 +23,9 @@
           <h3 class="masthead-brand">Computer Science</h3>
           <nav>
             <ul class="nav masthead-nav">
-              <li class="active"><a href="/stealth/">Home</a></li>
-              <li><a href="/stealth/?site=login">Login</a></li>
+              {% for item in navigation_bar %}
+              <li {% if item[0] == active_page %}class="active"{% endif %}><a href="/stealth/?site={{ item[0] }}">{{ item[1] }}</a></li>
+              {% endfor %}
             </ul>
           </nav>
         </div>

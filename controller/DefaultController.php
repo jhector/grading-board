@@ -14,7 +14,8 @@ class DefaultController extends BaseController
 
 		$data = $db->select('id, first_name, last_name', 'student', $cond);
 
-		$this->render($this->site.'.twig', array('students' => $data));
+		$this->vars['students'] = $data;
+		$this->render($this->site.'.twig', $this->vars);
 	}
 }
 ?>
