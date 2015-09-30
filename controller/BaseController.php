@@ -20,10 +20,10 @@ class BaseController
 		$this->vars = array();
 	}
 
-	public function run($db)
+	public function run($db, $bouncer)
 	{
 		if (in_array($this->action, get_class_methods($this)))
-			$this->{$this->action}($db);
+			$this->{$this->action}($db, $bouncer);
 		else
 			throw new Exception("Controller can't handle action: ".$this->action);
 	}

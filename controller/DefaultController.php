@@ -1,15 +1,15 @@
 <?php
 class DefaultController extends BaseController
 {
-	public function indexAction($db)
+	public function indexAction($db, $bouncer)
 	{
 		$this->render($this->site.'.twig', $this->vars);
 	}
 
-	public function searchAction($db)
+	public function searchAction($db, $bouncer)
 	{
-		$cond = "WHERE first_name='{$_REQUEST['name']}'
-			 OR last_name='{$_REQUEST['name']}'
+		$cond = "WHERE first_name='{$db->sanitize($_REQUEST['name'])}'
+			 OR last_name='{$db->sanitize($_REQUEST['name'])}'
 			 ORDER BY id ASC LIMIT 5";
 
 		$data = $db->select('id, first_name, last_name', 'student', $cond);
