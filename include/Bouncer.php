@@ -42,12 +42,9 @@ class Bouncer
 
 	public function clientGetToken()
 	{
-		$qry = "SELECT token FROM {$this->table} WHERE id=1";
-		$res = $this->db->raw($qry);
+		$row = $this->db->select('token', $this->table, 'WHERE id=1');
 
-		$row = mysql_fetch_assoc($res);
-
-		return $row['token'];
+		return $row[0]['token'];
 	}
 
 	private function reconnect()
@@ -72,13 +69,9 @@ class Bouncer
 
 	private function clientGetTries()
 	{
-		$qry = "SELECT tries FROM {$this->table} WHERE id=1";
-		if (!($res = $this->db->raw($qry)))
-			return -1;
+		$row = $this->db->select('tries', $this->table, 'WHERE id=1');
 
-		$row = mysql_fetch_assoc($res);
-
-		return $row['tries'];
+		return $row[0]['tries'];
 	}
 
 	private function clientNewToken()
