@@ -1,5 +1,5 @@
 <?php
-class LoginController extends BaseController
+class PanelController extends BaseController
 {
 	public function indexAction($db)
 	{
