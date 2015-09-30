@@ -30,8 +30,9 @@ class Database
 			throw new Exception(mysql_error());
 
 		$ret = array();
-		while ($row = mysql_fetch_array($result))
+		while ($row = mysql_fetch_assoc($result)) {
 			array_push($ret, $row);
+		}
 
 		return $ret;
 	}

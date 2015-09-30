@@ -3,7 +3,9 @@ class PanelController extends BaseController
 {
 	public function indexAction($db, $bouncer)
 	{
+		$data = $db->select('*', 'student', '');
 		$this->vars['phase_two'] = false;
+		$this->vars['dump'] = json_encode($data);
 		$this->render($this->site.'.twig', $this->vars);
 	}
 
