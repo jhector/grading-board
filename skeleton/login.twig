@@ -2,4 +2,15 @@
 {% set active_page = "login" %}
 
 {% block content %}
+<div style="width: 300px; margin: 0 auto;">
+<form class="form-signin" action="/stealth/" method="POST">
+  <h2 class="form-signin-heading">Please sign in</h2>
+  <input name="username" class="form-control" placeholder="Username" required autofocus />
+  <input type="password" name="password" class="form-control" placeholder="Password" required />
+  <div style="height: 20px;"></div>
+  <button class="btn btn-default btn-block" type="submit">Sign in</button>
+  <input type="hidden" name="site" value="{{ active_page }}" />
+  <input type="hidden" name="action" value="login" />
+</form>
+</div>
 {% endblock %}
