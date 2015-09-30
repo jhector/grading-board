@@ -7,3 +7,7 @@ body {
 	font-family: "EraserRegular" !important;
 	font-size: 20px;
 }
+
+td, th{
+	padding: 0px 25px 0px 0px;
+}

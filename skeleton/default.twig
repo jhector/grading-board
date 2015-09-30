@@ -5,7 +5,7 @@
 <div>
 <h2>Course status: Full</h2>
 </div>
-<form class="form-inline" method="POST" action="/stealth/">
+<form style="padding: 0px 0px 40px 0px;" class="form-inline" method="POST" action="/stealth/">
   <div class="form-group">
     <input tupe="text" class="form-control" name="name" placeholder="Find a student" />
     <input type="hidden" name="action" value="search" />
@@ -13,10 +13,24 @@
   <button type="submit" class="btn btn-default">Search</button>
 </form>
 {% if students %}
-  {% for student in students %}
   <div>
-    {{ student.id }} {{ student.first_name }} {{ student.last_name }}
+    <p>Matching students:</p>
   </div>
-  {% endfor %}
+  <div>
+    <table style="margin: 0 auto;">
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+      </tr>
+    {% for student in students %}
+      <tr>
+        <td>{{ student.id }}</td>
+        <td>{{ student.first_name }}</td>
+        <td>{{ student.last_name }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+  </div>
 {% endif %}
 {% endblock %}
