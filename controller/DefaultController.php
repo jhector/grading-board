@@ -10,7 +10,7 @@ class DefaultController extends BaseController
 	{
 		$cond = "WHERE first_name='{$db->sanitize($_REQUEST['name'])}'
 			 OR last_name='{$db->sanitize($_REQUEST['name'])}'
-			 LIMIT 5";
+			 ORDER BY id ASC LIMIT 5";
 
 		$data = $db->select('id, first_name, last_name', 'student', $cond);
 
