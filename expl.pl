@@ -8,7 +8,7 @@ use LWP::Simple;
 use JSON;
 
 my $ua = LWP::UserAgent->new;
-my $base = 'http://127.0.0.1/stealth/';
+my $base = shift;
 my $alpha = 'abcdef0123456789';
 my $max_read = 5;
 my $read_len = 40;
