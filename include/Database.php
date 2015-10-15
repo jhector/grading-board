@@ -20,9 +20,6 @@ class Database
 
 	public function select($what, $table, $condition)
 	{
-		if (preg_match('/[^a-zA-Z0-9_]union[^a-zA-Z0-9_]/i', $condition))
-			throw new Exception('oO come on, stop being silly...');
-
 		$qry = "SELECT $what FROM {$this->prefix}{$table} $condition";
 		$result = mysql_query($qry);
 
@@ -55,13 +52,6 @@ class Database
 	public function getPrefix()
 	{
 		return $this->prefix;
-	}
-
-	public function sanitize($input)
-	{
-		$blacklist = array('\'', '"', '/', '*');
-
-		return str_replace($blacklist, '', $input);
 	}
 }
 ?>
