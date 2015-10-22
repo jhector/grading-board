@@ -1,6 +1,6 @@
 ## Writeup
 ### Intended solution
-The give patch shows that some security mechanism were added. One of them was a blacklist that filters some chracters in the search string:
+The given patch shows that some security mechanism were added. One of them was a blacklist that filters some characters in the search string:
 ```php
 $blacklist = array('\'', '"', '/', '*');
 return str_replace($blacklist, '', $input);
@@ -18,11 +18,11 @@ Another limitation is the 'LIMIT 5' at the end, which we can't bypass because th
 Furthermore, the patch also introduces as token which changes after every 10 requests, that means that we have to perform an injection that allows us to extract the token in less than 10 requests.
 It was also possibel to retrieve a database dump from the students, by navigating to the panels section (it was hidden as a HTML comment), this dump will be usful for the final injection query.
 
-How do we extract a 40 chracter string using the above injection in less than 10 tries?!
+How do we extract a 40 character string using the above injection in less than 10 tries?!
 
-The idea is to create a mapping between user id (given as a search result) and a character in the string as well as the string position. For example, when the student with ID 1 is returned, that means that we have chracter 'a' at the first posiiton in the string, if student with ID 20 is returned that would mean that the second position in the string is an 'a'. This allows us to read 5 chracters at a time (with enough students to create the mapping).
+The idea is to create a mapping between user id (given as a search result) and a character in the string as well as the string position. For example, when the student with ID 1 is returned, that means that we have character 'a' at the first posiiton in the string, if student with ID 20 is returned that would mean that the second position in the string is an 'a'. This allows us to read 5 characters at a time (with enough students to create the mapping).
 
-This could be the mapping for the first position in the string, so if one of these IDs is returned we know which chracter is at the first position.
+This could be the mapping for the first position in the string, so if one of these IDs is returned we know which character is at the first position.
 | 1 | 3 | 4 | 6 | 7 | 10 | 11 | 13 | 14 | 16 | 18 | 19 | 20 | 21 | 22 | 23|
 |---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|---|
 | a | b | c | d | e | f  | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9 |
@@ -34,7 +34,7 @@ So our injection will look like this:
  OR id IN (<mapping right here>)
 ```
 
-Here is what the mapping looks like from my exploit (for the first 5 chracters of the token):
+Here is what the mapping looks like from my exploit (for the first 5 characters of the token):
 ```
  OR id IN (
  (select elt((select find_in_set((select substring(token, 1, 1) from tb8210aa9c07bdd4),0x612c622c632c642c652c662c302c312c322c332c342c352c362c372c382c39)),1,2,3,4,5,6,7,8,9,11,12,14,16,17,20,24)),
@@ -45,7 +45,7 @@ Here is what the mapping looks like from my exploit (for the first 5 chracters o
  ) # \
 ```
 
-The above statement is one request and returns 5 chracters, we can repeat that 7 more times to get the rest of the 35 chracters.
+The above statement is one request and returns 5 characters, we can repeat that 7 more times to get the rest of the 35 characters.
 
 ### Unintended solution
 Unfortunately there is also an unintended solution (which I didn't know about that that could actually work) which bypasses the union check.
