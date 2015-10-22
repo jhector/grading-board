@@ -13,7 +13,7 @@ ORDER BY id ASC LIMIT 5
 ```
 
 This allows us to do a SQL injection, but the problem is that we couldn't use 'union' because it is being detected and and exception is thrown (or not, see the unintended solution section).
-Another limitation is the 'LIMIT 5' at the end, which we can't bypass because there is a newline between the injection and the limit statement and we can only perform single line comments.
+Another limitation is the 'LIMIT 5' at the end, which we can't bypass because there is a newline between the injection and the limit statement and we can only perform single line comments (or not, see the second unintended solution).
 
 Furthermore, the patch also introduces as token which changes after every 10 requests, that means that we have to perform an injection that allows us to extract the token in less than 10 requests.
 It was also possibel to retrieve a database dump from the students, by navigating to the panels section (it was hidden as a HTML comment), this dump will be usful for the final injection query.
@@ -58,7 +58,7 @@ or 1=6e0union select 1,2,3 #\
 I hope you still had fun working on it.
 
 ### Unintended solution 2
-It was actually possible to bypass the 'LIMIT 5' by ending the payload with a null byte followed by the backslash because mysql_query() would interpret it as EOF.
+It was actually possible to bypass the 'LIMIT 5' by ending the payload with a null byte followed by the backslash because mysql_query() would interpret it as EOS.
 
 ```
 MySQL
@@ -70,4 +70,4 @@ ORDER BY id ASC LIMIT 5
 ```
 curl -X POST --data "name= OR id=<injection>;%00\&site=default&action=search" <Website> 
 ```
-Using this technique allowed the output of 160 ids at the time, making the challenge possible to solve in a single request the "intended" way.
+Using this technique allowed the output of 160 ids at the time, making the challenge possible to solve in a single request with the "intended" way using mapping.
