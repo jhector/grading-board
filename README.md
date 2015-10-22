@@ -58,12 +58,16 @@ or 1=6e0union select 1,2,3 #\
 I hope you still had fun working on it.
 
 ### Unintended solution 2
-It was actually possible to bypass the 'LIMIT 5' by ending the payload with a null byte followed by the backslash because mysql_query() would interpret it as EOS.
+It was actually possible to bypass the 'LIMIT 5' by ending the payload with a semicolon followed by a null byte and the the backslash.
+
+The backslash will escape the end of quote.
+The null byte will kill the stream because mysql_query() would interpret it as EOS.
+The semicolon will tell the database it is the end of the request.
 
 ```
 MySQL
-WHERE first_name='injection here and escape last quote like so \x00\'
-OR last_name='injection here and escape last quote like so \x00\'
+WHERE first_name='injection here and escape last quote like so ;\x00\'
+OR last_name='injection here and escape last quote like so ;\x00\'
 ORDER BY id ASC LIMIT 5
 ```
 ######Using cURL
